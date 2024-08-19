@@ -555,7 +555,7 @@ class AbstractInterval(object):
             max(x1*y1 , x1*y2 , x2*y1 , x2*y2)
         ])
     
-    @classmethod
+    
     def expow(self, val):
         """
         Define the substraction operator.
