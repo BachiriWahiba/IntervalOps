@@ -555,7 +555,7 @@ class AbstractInterval(object):
             max(x1*y1 , x1*y2 , x2*y1 , x2*y2)
         ])
     
-    @coerce_interval
+    @classmethod
     def expow(self, val):
         """
         Define the substraction operator.
@@ -568,8 +568,6 @@ class AbstractInterval(object):
             min(x1**val , x2**val),
             max(x1**val , x2**val)
         ])
-
-
 
     @coerce_interval
     def glb(self, other):
