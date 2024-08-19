@@ -537,13 +537,14 @@ class AbstractInterval(object):
             self.lower - other.upper,
             self.upper - other.lower
         ])
+
     
     @coerce_interval
     def __mul__(self, other):
         """
         Define the substraction operator.
 
-        [a, b] - [c, d] = [a - d, b - c]
+        [a, b] * [c, d] = [min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d)]
         """
         x1 = self.lower
         x2 = self.upper
@@ -553,6 +554,21 @@ class AbstractInterval(object):
             min(x1*y1 , x1*y2 , x2*y1 , x2*y2),
             max(x1*y1 , x1*y2 , x2*y1 , x2*y2)
         ])
+    
+    @coerce_interval
+    def pow(self, val):
+        """
+        Define the substraction operator.
+
+        [a, b] ** n = [min(a**n,b**n), max(a**n,b**n)]
+        """
+        x1 = self.lower
+        x2 = self.upper
+        return self.__class__([
+            min(x1**val , x2**val),
+            max(x1**val , x2**val)
+        ])
+
 
 
     @coerce_interval
