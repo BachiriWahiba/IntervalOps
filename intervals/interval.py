@@ -556,7 +556,7 @@ class AbstractInterval(object):
         ])
     
     @coerce_interval
-    def pow(self, val):
+    def expow(self, val):
         """
         Define the substraction operator.
 
