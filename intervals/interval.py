@@ -555,10 +555,10 @@ class AbstractInterval(object):
             max(x1*y1 , x1*y2 , x2*y1 , x2*y2)
         ])
     
-    
+    @coerce_interval
     def expow(self, val):
         """
-        Define the substraction operator.
+        Define the pow operator.
 
         [a, b] ** n = [min(a**n,b**n), max(a**n,b**n)]
         """
