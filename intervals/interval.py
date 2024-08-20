@@ -11,7 +11,7 @@ import operator
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 from math import ceil, floor
-
+import math
 from infinity import inf, is_infinite
 
 from .exc import IllegalArgument, IntervalException, RangeBoundsException
@@ -565,8 +565,8 @@ class AbstractInterval(object):
         val = int(val)
         x1 = int(self.lower)
         x2 = int(self.upper)
-        a = int(pow(x1,val))
-        b = int(pow(x2,val))
+        a = int(math.pow(x1,val))
+        b = int(math.pow(x2,val))
         return self.__class__([
             min(a , b),
             max(a, b)
