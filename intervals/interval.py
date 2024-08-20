@@ -562,6 +562,7 @@ class AbstractInterval(object):
 
         [a, b] ** n = [min(a**n,b**n), max(a**n,b**n)]
         """
+        val = int(val)
         x1 = int(self.lower)
         x2 = int(self.upper)
         a = int(pow(x1,val))
