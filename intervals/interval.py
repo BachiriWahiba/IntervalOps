@@ -565,8 +565,8 @@ class AbstractInterval(object):
         x1 = self.lower
         x2 = self.upper
         return self.__class__([
-            min(pow(x1,val) , pow(x2,val)),
-            max(pow(x1,val), pow(x2,val))
+            min(int(pow(x1,val)) , int(pow(x2,val))),
+            max(int(pow(x1,val)), int(pow(x2,val)))
         ])
 
     @coerce_interval
