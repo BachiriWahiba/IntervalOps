@@ -573,11 +573,11 @@ class AbstractInterval(object):
         ])
     
     @coerce_interval
-    def relu(self, val):
+    def relu(self, v):
         """
         Define the relu activation function
         """
-        print(val)
+        print(v.lower)
         val = float(val)
         x1 = self.lower
         x2 = self.upper
