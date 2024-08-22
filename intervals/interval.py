@@ -554,6 +554,27 @@ class AbstractInterval(object):
             min(x1*y1 , x1*y2 , x2*y1 , x2*y2),
             max(x1*y1 , x1*y2 , x2*y1 , x2*y2)
         ])
+    @coerce_interval
+    def __div__(self, other):
+        """
+        Define the substraction operator.
+
+        [a, b] * [c, d] = [min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d)]
+        """
+        x1 = self.lower
+        x2 = self.upper
+        y1 = other.lower
+        y2 = other.upper
+        if y1 !=0 and y2 != 0:
+            ydiv1 = 1/y1
+            ydiv2 = 1/y2
+            return self.__class__([
+            min(x1*ydiv1 , x1*ydiv2 , x2*ydiv1 , x2*ydiv2),
+            max(x1*ydiv1 , x1*ydiv2 , x2*ydiv1 , x2*ydiv2)
+        ])
+        else :
+            print("division par zero")
+            exit(0)
     
     @coerce_interval
     def expow(self, val):
