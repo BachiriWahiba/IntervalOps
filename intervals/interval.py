@@ -577,17 +577,17 @@ class AbstractInterval(object):
             exit(0)
     
     @coerce_interval
-    def expow(self, val):
+    def expow(self, v):
         """
         Define the pow operator.
 
         [a, b] ** n = [min(a**n,b**n), max(a**n,b**n)]
         """
-        val = int(val)
-        x1 = int(self.lower)
-        x2 = int(self.upper)
-        a = int(math.pow(x1,val))
-        b = int(math.pow(x2,val))
+        val = v.lower
+        x1 = self.lower
+        x2 = self.upper
+        a = math.pow(x1,val)
+        b = math.pow(x2,val)
         return self.__class__([
             min(a , b),
             max(a, b)
