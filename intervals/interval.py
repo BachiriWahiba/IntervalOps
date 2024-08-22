@@ -577,6 +577,7 @@ class AbstractInterval(object):
         """
         Define the relu activation function
         """
+        print(val)
         val = float(val)
         x1 = self.lower
         x2 = self.upper
