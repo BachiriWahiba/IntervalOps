@@ -13,7 +13,7 @@ from decimal import Decimal
 from math import ceil, floor
 import math
 from infinity import inf, is_infinite
-
+from utils import fix_saturate , fix_multiplication
 from .exc import IllegalArgument, IntervalException, RangeBoundsException
 from .parser import IntervalParser, IntervalStringParser
 
@@ -523,9 +523,20 @@ class AbstractInterval(object):
             lower_inc=self.lower_inc if self < other else other.lower_inc,
             upper_inc=self.upper_inc if self > other else other.upper_inc,
         )
-
     __radd__ = __add__
-
+    @coerce_interval
+    def fixadd(self, other,width_bits):
+        """
+        [a, b] + [c, d] = [a + c, b + d]
+        """
+        return self.__class__(
+            [
+                fix_saturate(self.lower + other.lower,width_bits),
+                fix_saturate(self.upper + other.upper,width_bits)
+            ],
+            lower_inc=self.lower_inc if self < other else other.lower_inc,
+            upper_inc=self.upper_inc if self > other else other.upper_inc,
+        )
     @coerce_interval
     def __sub__(self, other):
         """
@@ -554,6 +565,23 @@ class AbstractInterval(object):
             min(x1*y1 , x1*y2 , x2*y1 , x2*y2),
             max(x1*y1 , x1*y2 , x2*y1 , x2*y2)
         ])
+    
+    @coerce_interval
+    def fix_mul(self, other,frac_bits):
+        """
+        Define the substraction operator.
+
+        [a, b] * [c, d] = [min(a*c,a*d,b*c,b*d), max(a*c,a*d,b*c,b*d)]
+        """
+        x1 = self.lower
+        x2 = self.upper
+        y1 = other.lower
+        y2 = other.upper
+        return self.__class__([
+            min(fix_multiplication(x1*y1,frac_bits),fix_multiplication(x1*y2,frac_bits),fix_multiplication(x2*y1,frac_bits),fix_multiplication(x2*y2,frac_bits)),
+            max(fix_multiplication(x1*y1,frac_bits) , fix_multiplication(x1*y2,frac_bits), fix_multiplication(x2*y1,frac_bits) , fix_multiplication(x2*y2,frac_bits))
+        ])
+    
     @coerce_interval
     def __truediv__(self, other):
         """
