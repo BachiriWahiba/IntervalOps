@@ -13,7 +13,7 @@ from decimal import Decimal
 from math import ceil, floor
 import math
 from infinity import inf, is_infinite
-from utils import fix_saturate , fix_multiplication
+from intervals.func import fix_saturate , fix_multiplication
 from .exc import IllegalArgument, IntervalException, RangeBoundsException
 from .parser import IntervalParser, IntervalStringParser
 
