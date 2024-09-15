@@ -524,19 +524,7 @@ class AbstractInterval(object):
             upper_inc=self.upper_inc if self > other else other.upper_inc,
         )
     __radd__ = __add__
-    @coerce_interval
-    def fix_add(self, other,width_bits):
-        """
-        [a, b] + [c, d] = [a + c, b + d]
-        """
-        return self.__class__(
-            [
-                fix_saturate(self.lower + other.lower,width_bits),
-                fix_saturate(self.upper + other.upper,width_bits)
-            ],
-            lower_inc=self.lower_inc if self < other else other.lower_inc,
-            upper_inc=self.upper_inc if self > other else other.upper_inc,
-        )
+    
     @coerce_interval
     def __sub__(self, other):
         """
@@ -567,6 +555,20 @@ class AbstractInterval(object):
         ])
     
     @coerce_interval
+    def fix_add(self, other,width_bits):
+        """
+        [a, b] + [c, d] = [a + c, b + d]
+        """
+        return self.__class__(
+            [
+                fix_saturate(self.lower + other.lower,width_bits),
+                fix_saturate(self.upper + other.upper,width_bits)
+            ],
+            lower_inc=self.lower_inc if self < other else other.lower_inc,
+            upper_inc=self.upper_inc if self > other else other.upper_inc,
+        )
+    
+    @coerce_interval
     def fix_mul(self, other,frac_bits):
         """
         Define the substraction operator.
@@ -579,7 +581,7 @@ class AbstractInterval(object):
         y2 = other.upper
         return self.__class__([
             min(fix_multiplication(x1*y1,frac_bits),fix_multiplication(x1*y2,frac_bits),fix_multiplication(x2*y1,frac_bits),fix_multiplication(x2*y2,frac_bits)),
-            max(fix_multiplication(x1*y1,frac_bits) , fix_multiplication(x1*y2,frac_bits), fix_multiplication(x2*y1,frac_bits) , fix_multiplication(x2*y2,frac_bits))
+            max(fix_multiplication(x1*y1,frac_bits), fix_multiplication(x1*y2,frac_bits), fix_multiplication(x2*y1,frac_bits) , fix_multiplication(x2*y2,frac_bits))
         ])
     
     @coerce_interval
