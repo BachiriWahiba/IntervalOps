@@ -569,7 +569,7 @@ class AbstractInterval(object):
         )
     
     @coerce_interval
-    def fix_mul(self, other,frac_bits):
+    def fix_mul(self, other,frac_bits,width_bits):
         """
         Define the substraction operator.
 
@@ -580,8 +580,8 @@ class AbstractInterval(object):
         y1 = other.lower
         y2 = other.upper
         return self.__class__([
-            min(fix_multiplication(x1*y1,frac_bits),fix_multiplication(x1*y2,frac_bits),fix_multiplication(x2*y1,frac_bits),fix_multiplication(x2*y2,frac_bits)),
-            max(fix_multiplication(x1*y1,frac_bits), fix_multiplication(x1*y2,frac_bits), fix_multiplication(x2*y1,frac_bits) , fix_multiplication(x2*y2,frac_bits))
+            min(fix_multiplication(x1*y1,frac_bits,width_bits),fix_multiplication(x1*y2,frac_bits,width_bits),fix_multiplication(x2*y1,frac_bits,width_bits),fix_multiplication(x2*y2,frac_bits,width_bits)),
+            max(fix_multiplication(x1*y1,frac_bits,width_bits), fix_multiplication(x1*y2,frac_bits,width_bits), fix_multiplication(x2*y1,frac_bits,width_bits) , fix_multiplication(x2*y2,frac_bits,width_bits))
         ])
     
     @coerce_interval
