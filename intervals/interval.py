@@ -176,8 +176,7 @@ class AbstractInterval(object):
         if step is not None:
             self.step = step
         self.lower, self.upper, self.lower_inc, self.upper_inc = (
-            self.parser(bounds, lower_inc, upper_inc)
-        )
+            self.parser(bounds, lower_inc, upper_inc))
 
         if self.lower > self.upper:
             raise RangeBoundsException(
