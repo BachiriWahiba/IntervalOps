@@ -16,7 +16,7 @@ from infinity import inf, is_infinite
 from intervals.func import fix_saturate , fix_multiplication
 from .exc import IllegalArgument, IntervalException, RangeBoundsException
 from .parser import IntervalParser, IntervalStringParser
-
+import numpy as np
 
 def is_number(number):
     return isinstance(number, (float, int, Decimal))
@@ -747,7 +747,7 @@ class AbstractInterval(object):
 
 
 class NumberInterval(AbstractInterval):
-    rounding_type = Decimal
+    rounding_type = np.float32
 
     def round_value_by_step(self, value):
         if self.step and not is_infinite(value):
