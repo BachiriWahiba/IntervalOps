@@ -525,7 +525,7 @@ class AbstractInterval(object):
         )
     __radd__ = __add__
     @coerce_interval
-    def fixadd(self, other,width_bits):
+    def fix_add(self, other,width_bits):
         """
         [a, b] + [c, d] = [a + c, b + d]
         """
