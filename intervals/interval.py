@@ -788,7 +788,7 @@ class IntInterval(NumberInterval):
             )
         return self.lower
     
-    @coerce_interval
+    # @coerce_interval
     def fix_add(self, other,width_bits):
         """
         [a, b] + [c, d] = [a + c, b + d]
@@ -802,7 +802,7 @@ class IntInterval(NumberInterval):
             upper_inc=self.upper_inc if self > other else other.upper_inc,
         )
     
-    @coerce_interval
+    # @coerce_interval
     def fix_mul(self, other,frac_bits,width_bits):
         """
         Define the substraction operator.
