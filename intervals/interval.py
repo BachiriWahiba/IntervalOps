@@ -793,12 +793,10 @@ class IntInterval(NumberInterval):
         """
         [a, b] + [c, d] = [a + c, b + d]
         """
-        return self.__class__(
-            [
+        return self.__class__([
                 fix_saturate(self.lower + other.lower,width_bits),
                 fix_saturate(self.upper + other.upper,width_bits)
-            ]
-        )
+            ])
     
     # @coerce_interval
     def fix_mul(self, other,frac_bits,width_bits):
