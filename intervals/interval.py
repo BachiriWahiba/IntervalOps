@@ -797,9 +797,7 @@ class IntInterval(NumberInterval):
             [
                 fix_saturate(self.lower + other.lower,width_bits),
                 fix_saturate(self.upper + other.upper,width_bits)
-            ],
-            lower_inc=self.lower_inc if self < other else other.lower_inc,
-            upper_inc=self.upper_inc if self > other else other.upper_inc,
+            ]
         )
     
     # @coerce_interval
